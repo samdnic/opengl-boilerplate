@@ -4,20 +4,17 @@ A cross-platform boilerplate project for OpenGL using GLFW and GLEW in C++. Comp
 
 I want to keep this project as simple as possible and is targetted to those who are learning modern OpenGL.
 
+This is trivially adapted from [andersonfreitas/opengl-boilerplate](http://github.com/andersonfreitas/opengl-boilerplate) to fix a broken GLEW build. Instead you must have GLEW already available on your system.
+
 ## Cloning
 
-The `external/` folder contains all the external dependencies used, and they are tracked using git submodules. In order to compile the program, you should first clone the repository and then download the dependencies with `git submodule init` and `git submodule update`
+The `external/` folder contains some of the external dependencies used, and they are tracked using git submodules. In order to compile the program, you should first clone the repository and then download the dependencies with `git submodule init` and `git submodule update`
 
 Alternatively, you can achieve this with a one-liner as follows:
 
     git clone git@github.com:andersonfreitas/opengl-boilerplate.git --recursive
 
-## Initializing GLEW
-
-Before compiling, you should first generate the `include/` folder for GLFW:
-
-    cd external/glew
-    make extensions
+(Obviously you'll want to set the username to samdnic to get this one instead!)
 
 ## Build
 

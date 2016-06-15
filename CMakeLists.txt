@@ -1,8 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
 
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+find_package(GLEW REQUIRED)
+
 set(GLFW_SOURCE_DIR "external/glfw")
 set(GLM_SOURCE_DIR "external/glm")
-set(GLEW_SOURCE_DIR "external/glew")
 
 # Building only the GLFW lib
 set(BUILD_SHARED_LIBS OFF CACHE BOOL "")
@@ -16,21 +19,13 @@ add_subdirectory(${GLFW_SOURCE_DIR} ${GLEW_SOURCE_DIR})
 include_directories(${GLFW_SOURCE_DIR}/include
                     ${GLFW_SOURCE_DIR}/deps
                     ${GLM_SOURCE_DIR}
-                    ${GLEW_SOURCE_DIR}/include)
+                    ${OPENGL_INCLUDE_DIRS}
+                    ${GLUT_INCLUDE_DIRS}
+                    ${GLEW_INCLUDE_DIRS})
 
-add_library(glew STATIC
-  ${GLEW_SOURCE_DIR}/src/glew.c
-  ${GLEW_SOURCE_DIR}/include
-)
-
-target_link_libraries(glew ${GLFW_LIBRARIES})
-
-add_definitions(
-  -DGLEW_STATIC
-)
 
 add_executable("opengl-boilerplate" main.cpp)
-target_link_libraries("opengl-boilerplate" glfw ${GLFW_LIBRARIES} glew)
+target_link_libraries("opengl-boilerplate" glfw ${GLFW_LIBRARIES} ${OPENGL_LIBRARIES} ${GLUT_LIBRARY} ${GLEW_LIBRARY})
 
 if (APPLE)
   set(APP_NAME "OpenGL Boilerplate")
